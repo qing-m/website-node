@@ -1,0 +1,22 @@
+{
+  "name": "website-node",
+  "version": "1.0.0",
+  "description": "serve",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qing-m/website-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qing-m/website-node/issues"
+  },
+  "homepage": "https://github.com/qing-m/website-node#readme",
+  "dependencies": {
+    "koa": "^2.13.1"
+  }
+}
