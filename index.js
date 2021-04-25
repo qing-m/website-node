@@ -2,8 +2,11 @@ const Koa = require('koa')
 const Router = require('koa-router')
 const app = new Koa()
 
-app.use(async (ctx)=>{
-  ctx.body = '404'
+app.use(async (ctx, next)=>{
+  await next()
+  if(parseInt(ctx.status) === 404){  // 没有资源
+    ctx.response.redirect("/404")
+  }
 })
 
 const router = new Router()
