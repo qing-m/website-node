@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const Router = require('koa-router')
+const bodyParser = require('koa-bodyparser') //对于POST请求的处理，koa-bodyparser中间件可以把koa2上下文的formData数据解析到ctx.request.body中
 const app = new Koa()
 
 
@@ -51,8 +52,7 @@ app.use( async ( ctx ) => {
     ctx.body = html
   } else if ( ctx.url === '/' && ctx.method === 'POST' ) {
     // 当POST请求的时候，解析POST表单里的数据，并显示出来
-    let postData = await parsePostData( ctx )
-    console.log(postData)
+    let postData = ctx.request.body
     ctx.body = postData
   } else {
     // 其他请求显示404
@@ -69,7 +69,7 @@ router.get('/about', async (ctx) =>{
   }
 })
 app.use(router.routes())
-
+app.use(bodyParser())
 
 app.listen(3000,()=>{
   console.log('[demo] start-quick is starting at port 3000')
