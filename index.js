@@ -7,9 +7,7 @@ const path = require('path')
 const app = new Koa()
 app.use(bodyParser())
 const staticPath = './static'
-app.use(static(
-  path.join( __dirname,  staticPath)
-))
+app.use(static(path.join( __dirname,  staticPath)))
 
 app.use(async (ctx) =>{
   if ( ctx.url === '/index' ) {
@@ -58,6 +56,19 @@ router.post('/api', async (ctx) =>{
   ctx.body = postData
 })
 app.use(router.routes())
+
+const mysql      = require('mysql')
+
+const connection = mysql.createConnection({
+  host     : '47.96.153.122',   // 数据库地址
+  user     : 'root',    // 数据库用户
+  password : 'AloneWangHeYao1998.',   // 数据库密码
+  database : 'my_test'  // 选中数据库
+})
+
+connection.query('SELECT * FROM my_table',  (error, results, fields) => {
+  console.log(error)
+});
 
 app.listen(3000,()=>{
   console.log('[demo] start-quick is starting at port 3000')
