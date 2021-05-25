@@ -4,7 +4,7 @@
   "description": "serve",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,18 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
     "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "require-directory": "^2.1.1",
+    "sequelize": "^6.6.2"
   }
 }
