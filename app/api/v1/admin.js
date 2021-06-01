@@ -8,7 +8,7 @@ const router = new Router({
 
 const AdminDto = new AdminDao()
 
-router.get('/register', async (ctx) => {
+router.post('/register', async (ctx) => {
   await AdminDto.getUserAdmin()
   ctx.response.status = 200
   ctx.body = '注册成功'
