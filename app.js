@@ -1,5 +1,8 @@
+require('module-alias/register') // 文件夹别名
+
 const Koa = require('koa')
 const InitManager = require('./core/init')
+const catchError = require('./middleware/exception.js')
 const parser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 
@@ -17,6 +20,7 @@ app.use(async (ctx, next)=> {
 });
 
 app.use(cors())
+app.use(catchError)
 app.use(parser())
 
 InitManager.initCore(app)
