@@ -10,7 +10,7 @@ const router = new Router({
 const AdminDto = new AdminDao()
 
 router.post('/register', new Auth().m, async (ctx) => {
-  // await AdminDto.registerAuth(ctx.request.body)
+  await AdminDto.registerAuth(ctx.request.body)
   ctx.response.status = 200
   ctx.body = '注册成功'
 })
