@@ -7,5 +7,8 @@ module.exports = {
     password: 'AloneWangHeYao1998.',
     logging: false,
     timezone: '+08:00',
+  },
+  security: {
+    secretKey: 'Token-Key'
   }
 }

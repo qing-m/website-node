@@ -12,6 +12,7 @@ class InitManager {
   // 加载全部路由
   static initLoadRouters() {
     // 绝对路径
+    // process.cwd() 返回当前项目的根目录
     const apiDirectory = `${process.cwd()}/app/api`
     // 路由自动加载
     requireDirectory(module, apiDirectory, {

@@ -1,17 +1,33 @@
+const jwt = require('jsonwebtoken')
 const { TokenType } = require('../app/lib/enums')
 
-const { AuthFailed } = require('@exception')
+const { AuthFailed, ExpiredToken, InvalidToken, Forbidden } = require('@exception')
+
 
 async function parseHeader(ctx, type = TokenType.ACCESS) {
   if(!ctx.header || !ctx.header.token) {
     throw new AuthFailed({msg: '认证失败，请检查令牌是否正确'})
   }
-  ctx.Auth = {
-    uid: '1'
+  const token = ctx.header.token
+  let decode
+  try {
+    decode = jwt.verify(token,global.config.security.secretKey)
+  } catch (error) {
+    if(error.name === 'TokenExpiredError') {
+      throw new ExpiredToken({ msg: '认证失败，token已过期' })
+    }else {
+      throw new InvalidToken({ msg: '认证失败，令牌失效'})
+    }
+  }
+  // 权限验证
+  if (!decode.scope || decode.scope < ctx.level) {
+    throw new Forbidden({ msg: '权限不足' })
+  }
+  ctx.auth = {
+    uid: decode.uid,
+    scope: decode.scope
   }
 }
-
-
 
 class Auth {
   constructor (level) {
@@ -40,7 +56,26 @@ const loginRequired = async function (ctx, next) {
   }
 }
 
+/**
+ * 生成令牌
+ * @param {number} uid
+ * @param {number} scope
+ * @param {TokenType} type 
+ * @param {Object} options 
+ */
+ const generateToken = function (uid, scope, type = TokenType.ACCESS, options) {
+  const secretKey = global.config.security.secretKey
+  const token = jwt.sign({
+      uid,
+      scope,
+      type
+  }, secretKey, {
+      expiresIn: options.expiresIn || '24h'
+  })
+  return token
+}
 
 module.exports = {
   Auth,
+  generateToken
 }

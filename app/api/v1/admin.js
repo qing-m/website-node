@@ -1,7 +1,7 @@
 const Router = require('koa-router')
 
-const  { Auth } =  require('../../../middleware/auth')
-const { AdminDao } =  require('../../dao/admin')
+const  { Auth } =  require('@middleware/auth')
+const { AdminDao } =  require('@dao/admin')
 
 const router = new Router({
   prefix: '/api/v1/admin'
@@ -10,7 +10,6 @@ const router = new Router({
 const AdminDto = new AdminDao()
 
 router.post('/register', new Auth().m, async (ctx) => {
-  console.log(ctx.request.body)
   // await AdminDto.registerAuth(ctx.request.body)
   ctx.response.status = 200
   ctx.body = '注册成功'
