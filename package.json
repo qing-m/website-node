@@ -23,12 +23,14 @@
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "lodash": "^4.17.21",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "validator": "^13.6.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
+    "eslint": "^7.30.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
@@ -36,7 +38,8 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "require-directory": "^2.1.1",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "standard": "^16.0.3"
   },
   "_moduleAliases": {
     "@exception": "core/http-exception.js",

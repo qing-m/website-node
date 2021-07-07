@@ -16,7 +16,7 @@ Admin.init({
     type: DataTypes.STRING,
     // allowNull: false,
   },
-  passworld: {
+  password: {
     type: DataTypes.STRING,
     // defaultValue: "a123456" // 默认值
     // allowNull 默认为 true
