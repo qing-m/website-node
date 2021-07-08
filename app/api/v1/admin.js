@@ -13,13 +13,10 @@ const AdminDto = new AdminDao()
 router.post('/register', new Auth().m, async (ctx) => {
   const v = await new createAuthNumberValidator().validate(ctx)
   // await AdminDto.registerAuth(ctx.request.body)
-  ctx.response.status = 200
-  ctx.body = '注册成功'
 })
 
-router.post('/login', async (ctx) => {
-  ctx.response.status = 200
-  ctx.body = '注册成功'
+router.post('/login', new Auth().m, async (ctx) => {
+
 })
 
 module.exports = router
