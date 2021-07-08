@@ -1,5 +1,6 @@
 const { sequelize } = require('@core/db')
 const { Sequelize, DataTypes, Model } = require('sequelize')
+const bcrypt = require('bcryptjs')
 
 class Admin extends Model {
   toJSON() {
@@ -17,9 +18,16 @@ Admin.init({
     // allowNull: false,
   },
   password: {
-    type: DataTypes.STRING,
-    // defaultValue: "a123456" // 默认值
-    // allowNull 默认为 true
+    type: DataTypes.STRING(127),
+    allowNull: false,
+    set(origin) {
+      const salt = bcrypt.genSaltSync(10)
+      const val = bcrypt.hashSync(origin, salt)
+      this.setDataValue('password', val)
+    },
+    get() {
+      return this.getDataValue('password');
+    }
   },
   nickName: {
     type: DataTypes.STRING
