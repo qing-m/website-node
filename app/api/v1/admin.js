@@ -11,7 +11,7 @@ const router = new Router({
 
 const AdminDto = new AdminDao()
 
-router.post('/register', new Auth().m, async (ctx) => {
+router.post('/register', async (ctx) => {
   const v = await new createAuthNumberValidator().validate(ctx)
   await AdminDto.registerAuth(v)
   throw new Success('注册成功')
