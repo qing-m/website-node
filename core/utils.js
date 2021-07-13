@@ -5,6 +5,7 @@ const findMembers = function (instance, { prefix, specifiedType, filter }) {
     if (instance.__proto__ === null) {
       return []
     }
+    // 返回一个包含所有自身属性（不包含继承属性）的数组。(类似于 Object.keys(), 但不会受
     let names = Reflect.ownKeys(instance)
     names = names.filter((name) => {
       // 过滤掉不满足条件的属性或方法名
@@ -20,6 +21,9 @@ const findMembers = function (instance, { prefix, specifiedType, filter }) {
       }
     }
     if (prefix) {
+      // startsWith() 方法用于检测字符串是否以指定的子字符串开始。
+      // 如果是以指定的子字符串开头返回 true，否则 false。
+      // startsWith() 方法对大小写敏感。
       if (value.startsWith(prefix)) { return true }
     }
     if (specifiedType) {
