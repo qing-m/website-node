@@ -1,6 +1,6 @@
 const { LinValidator, Rule } = require('@core/lin-validator')
 
-class createAuthNumberValidator extends LinValidator {
+class CreateAuthNumberValidator extends LinValidator {
   constructor() {
     super()
     this.email = [
@@ -16,6 +16,15 @@ class createAuthNumberValidator extends LinValidator {
   }
 }
 
+class LoginValidator extends LinValidator {
+  constructor() {
+    super()
+    this.nickName = new Rule('isNotEmpty', '昵称不可为空');
+    this.password = new Rule('isNotEmpty', '密码不可为空');
+  }
+}
+
 module.exports = {
-  createAuthNumberValidator
+  CreateAuthNumberValidator,
+  LoginValidator
 }
