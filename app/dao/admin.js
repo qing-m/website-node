@@ -1,5 +1,7 @@
 const { Admin } = require('@models/admin')
-const { Forbidden } = require('@exception')
+const { Forbidden, NotFound, ParameterException } = require('@exception')
+
+const bcrypt = require('bcryptjs')
 
 class AdminDao {
   async registerAuth(v) {
@@ -14,6 +16,21 @@ class AdminDao {
       email: email,
       password: password
     })
+  }
+
+  async loginAuth(v) {
+    const { nickName, password } = v.get('body')
+    const user = await Admin.findOne({
+      where: {email: nickName}
+    })
+    if(!user) {
+      throw new NotFound('该用户不存在')
+    }
+    const correct = bcrypt.compareSync(password, user.password)
+    if (!correct) {
+      throw new ParameterException('密码不正确')
+    }
+    return user
   }
 }
 

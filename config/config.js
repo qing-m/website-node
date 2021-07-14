@@ -9,6 +9,7 @@ module.exports = {
     timezone: '+08:00',
   },
   security: {
-    secretKey: 'Token-Key'
+    secretKey: 'Token-Key',
+    expiresIn: 60 * 60 // 过期时间
   }
 }
