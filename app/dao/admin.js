@@ -32,6 +32,19 @@ class AdminDao {
     }
     return user
   }
+
+  async getUserInfo(v) {
+    const { userId } = v.get('body')
+    const userInfo = await Admin.findAll({
+      where: { id: userId },
+      raw: true,
+    })
+    console.log(JSON.stringify(userInfo))
+    if(!userInfo) {
+      throw new NotFound('该用户不存在')
+    }
+    return userInfo
+  }
 }
 
 module.exports = {

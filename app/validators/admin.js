@@ -4,7 +4,7 @@ class CreateAuthNumberValidator extends LinValidator {
   constructor() {
     super()
     this.email = [
-      new Rule('isEmail', '不符合Email规范')
+      new Rule('isEmail', '请输入正确的Email')
     ],
     this.password = [
       new Rule('isLength', '密码长度为6~32个字符', {
@@ -28,7 +28,17 @@ class LoginValidator extends LinValidator {
   }
 }
 
+class GetUserInfo extends LinValidator {
+  constructor() {
+    super()
+    this.userId = [
+      new Rule('isLength', '请查询参数是否正确',{min: 1})
+    ]
+  }
+}
+
 module.exports = {
   CreateAuthNumberValidator,
-  LoginValidator
+  LoginValidator,
+  GetUserInfo
 }

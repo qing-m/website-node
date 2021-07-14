@@ -109,7 +109,7 @@ class LinValidator {
       }
     }
     if (!result.pass) {
-      const msg = `${isCustomFunc ? '' : key}${result.msg}`
+      const msg = result.msg
       return {
         msg: msg,
         success: false

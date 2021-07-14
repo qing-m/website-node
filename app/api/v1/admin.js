@@ -1,6 +1,10 @@
 const Router = require('koa-router')
 
-const { CreateAuthNumberValidator, LoginValidator } = require('@validators/admin')
+const { 
+  CreateAuthNumberValidator,
+  LoginValidator,
+  GetUserInfo 
+} = require('@validators/admin')
 const { Auth, generateToken } =  require('@middleware/auth')
 const { AdminDao } =  require('@dao/admin')
 const { Success } = require('@exception')
@@ -31,9 +35,17 @@ router.post('/login', async (ctx) => {
     request: 'POST: /api/v1/admin/logi',
     data: {
       accessToken: accessToken,
-      refreshToken: refreshToken
+      refreshToken: refreshToken,
+      id: author['id']
     }
   }
+})
+
+router.get('/userInfo', new Auth().m, async(ctx) => {
+  const v = await new GetUserInfo().validate(ctx)
+  const userInfo = await AdminDto.getUserInfo(v)
+  ctx.body = userInfo
+  // throw new Success('成功',200,userInfo)
 })
 
 module.exports = router
