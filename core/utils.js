@@ -5,7 +5,7 @@ const findMembers = function (instance, { prefix, specifiedType, filter }) {
     if (instance.__proto__ === null) {
       return []
     }
-    // 返回一个包含所有自身属性（不包含继承属性）的数组。(类似于 Object.keys(), 但不会受
+    // 返回一个包含所有自身属性（不包含继承属性）的数组。类似于 Object.keys()
     let names = Reflect.ownKeys(instance)
     names = names.filter((name) => {
       // 过滤掉不满足条件的属性或方法名

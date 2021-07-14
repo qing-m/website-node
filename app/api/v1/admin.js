@@ -19,8 +19,7 @@ router.post('/register', async (ctx) => {
 
 router.post('/login', async (ctx) => {
   const v = await new LoginValidator().validate(ctx)
-  // console.log(v)
-  // ctx.body = '11111'
+  ctx.body = v
 })
 
 module.exports = router

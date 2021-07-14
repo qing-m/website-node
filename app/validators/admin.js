@@ -19,8 +19,12 @@ class CreateAuthNumberValidator extends LinValidator {
 class LoginValidator extends LinValidator {
   constructor() {
     super()
-    this.nickName = new Rule('isNotEmpty', '昵称不可为空');
-    this.password = new Rule('isNotEmpty', '密码不可为空');
+    this.nickName = [
+      new Rule('isLength', '账户不可为空', {min: 1})
+    ]
+    this.password = [
+      new Rule('isLength', '密码不可为空', {min: 1})
+    ]
   }
 }
 

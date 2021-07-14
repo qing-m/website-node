@@ -1,5 +1,5 @@
 const validator = require('validator')
-const { cloneDeep, set, get, last } = require('lodash')
+const { cloneDeep, set, get, last, meanBy } = require('lodash')
 const { findMembers } = require('./utils')
 const { ParameterException } = require('@exception')
 
@@ -37,6 +37,7 @@ class LinValidator {
     if (/validate([A-Z])\w+/g.test(key)) {
       return true
     }
+    // 查找 Rule为数组的
     if (this[key] instanceof Array) {
       this[key].forEach(value => {
         const isRuleType = value instanceof Rule
