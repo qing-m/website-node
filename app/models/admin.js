@@ -26,6 +26,7 @@ Admin.init({
       this.setDataValue('password', val)
     },
     get() {
+      console.log(this.getDataValue)
       return this.getDataValue('password');
     }
   },

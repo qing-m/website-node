@@ -12,6 +12,9 @@ class CreateAuthNumberValidator extends LinValidator {
         max: 32
       }),
       new Rule('matches', '密码不符合规范', '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]')
+    ],
+    this.nickName = [
+      new Rule('isLength', '请填写昵称', {min: 1})
     ]
   }
 }
@@ -28,17 +31,7 @@ class LoginValidator extends LinValidator {
   }
 }
 
-class GetUserInfo extends LinValidator {
-  constructor() {
-    super()
-    this.userId = [
-      new Rule('isLength', '请查询参数是否正确',{min: 1})
-    ]
-  }
-}
-
 module.exports = {
   CreateAuthNumberValidator,
-  LoginValidator,
-  GetUserInfo
+  LoginValidator
 }

@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 
 class AdminDao {
   async registerAuth(v) {
-    const { email, password } = v.get('body')
+    const { email, password, nickName } = v.get('body')
     const user = await Admin.findOne({
       where: {email: email}
     })
@@ -14,7 +14,8 @@ class AdminDao {
     }
     await Admin.create({
       email: email,
-      password: password
+      password: password,
+      nickName: nickName
     })
   }
 
@@ -31,19 +32,6 @@ class AdminDao {
       throw new ParameterException('密码不正确')
     }
     return user
-  }
-
-  async getUserInfo(v) {
-    const { userId } = v.get('body')
-    const userInfo = await Admin.findAll({
-      where: { id: userId },
-      raw: true,
-    })
-    console.log(JSON.stringify(userInfo))
-    if(!userInfo) {
-      throw new NotFound('该用户不存在')
-    }
-    return userInfo
   }
 }
 

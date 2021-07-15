@@ -27,25 +27,15 @@ router.post('/login', async (ctx) => {
   const v = await new LoginValidator().validate(ctx)
   const author = await AdminDto.loginAuth(v)
 
-  const accessToken = generateToken(author.id, author.email, TokenType.ACCESS, { expiresIn: global.config.security.expiresIn })
-  const refreshToken = generateToken(author.id, author.email, TokenType.REFRESH, { expiresIn: global.config.security.refreshExp })
+  const accessToken = generateToken(author.uuId, author.email, TokenType.ACCESS, { expiresIn: global.config.security.expiresIn })
   ctx.body = {
     msg: '登录成功',
     errorCode: 0,
     request: 'POST: /api/v1/admin/logi',
     data: {
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-      id: author['id']
+      token: accessToken,
     }
   }
-})
-
-router.get('/userInfo', new Auth().m, async(ctx) => {
-  const v = await new GetUserInfo().validate(ctx)
-  const userInfo = await AdminDto.getUserInfo(v)
-  ctx.body = userInfo
-  // throw new Success('成功',200,userInfo)
 })
 
 module.exports = router
