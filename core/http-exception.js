@@ -24,7 +24,7 @@ class Success extends HttpException {
     super()
     this.msg = msg || 'ok'
     this.errorCode = errorCode || 0
-    this.code = 201
+    this.code = 200
   }
 }
 
