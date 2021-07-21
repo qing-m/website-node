@@ -20,9 +20,9 @@ class AdminDao {
   }
 
   async loginAuth(v) {
-    const { nickName, password } = v.get('body')
+    const { email, password } = v.get('body')
     const user = await Admin.findOne({
-      where: {email: nickName}
+      where: {email: email}
     })
     if(!user) {
       throw new NotFound('该用户不存在')
