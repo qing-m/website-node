@@ -2,6 +2,7 @@ const { LinValidator, Rule } = require('@core/lin-validator')
 
 const regExpPasswore = '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]'
 const regExpNickName = '^[\u4e00-\u9fa5]{0,}$'
+const regExpId = '^[0-9]*[1-9][0-9]*$'
 
 class CreateAuthNumberValidator extends LinValidator {
   constructor() {
@@ -34,7 +35,17 @@ class LoginValidator extends LinValidator {
   }
 }
 
+class GetUserInfoValidator extends LinValidator {
+  constructor() {
+    super()
+    this.id = [
+      new Rule('matches','ID不能为空', regExpId)
+    ]
+  }
+}
+
 module.exports = {
   CreateAuthNumberValidator,
-  LoginValidator
+  LoginValidator,
+  GetUserInfoValidator
 }

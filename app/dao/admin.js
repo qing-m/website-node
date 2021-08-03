@@ -33,6 +33,17 @@ class AdminDao {
     }
     return user
   }
+
+  async getUserInfoAuth(v) {
+    const { id } = v.get('body')
+    const user = await Admin.findOne({
+      where: { id: id }
+    })
+    if(!user) {
+      throw new NotFound('用户不存在')
+    }
+    return user
+  }
 }
 
 module.exports = {
