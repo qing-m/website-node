@@ -1,12 +1,13 @@
 require('module-alias/register') // 文件夹别名
 
 const Koa = require('koa')
+const WebSocket = require('koa-websocket')
 const InitManager = require('./core/init')
 const catchError = require('./middleware/exception.js')
 const parser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 
-const app = new Koa()
+const app = WebSocket(new Koa())
 
 app.use(async (ctx, next)=> {
   ctx.set('Access-Control-Allow-Origin', '*');
