@@ -1,3 +1,7 @@
+/*
+ * @Author: 王鹤垚
+ * @LastEditors: 王鹤垚
+ */
 const jwt = require('jsonwebtoken')
 const { TokenType } = require('../app/lib/enums')
 
@@ -11,7 +15,14 @@ async function parseHeader(ctx, type = TokenType.ACCESS) {
   const token = ctx.header.token
   let decode
   try {
-    decode = jwt.verify(token,global.config.security.secretKey)
+    const secretKey = ctx.header.uid
+    const id = ctx.request.body.id
+    decode = jwt.verify(token,secretKey)
+    if(decode.uid === ctx.header.uid && decode.scope.toString() === id) {
+      console.log('验证通过')
+    }else {
+      throw new InvalidToken({ msg: '认证失败，令牌失效'})
+    }
   } catch (error) {
     if(error.name === 'TokenExpiredError') {
       throw new ExpiredToken({ msg: '认证失败，token已过期' })
@@ -64,7 +75,7 @@ const loginRequired = async function (ctx, next) {
  * @param {Object} options 
  */
  const generateToken = function (uid, scope, type = TokenType.ACCESS, options) {
-  const secretKey = global.config.security.secretKey
+  const secretKey = uid
   const token = jwt.sign({
       uid,
       scope,
