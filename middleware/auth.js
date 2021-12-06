@@ -13,14 +13,11 @@ async function parseHeader(ctx, type = TokenType.ACCESS) {
     throw new AuthFailed({msg: '认证失败，请检查令牌是否正确'})
   }
   const token = ctx.header.token
+  const secretKey = ctx.header.uuid
   let decode
   try {
-    const secretKey = ctx.header.uid
-    const id = ctx.request.body.id
     decode = jwt.verify(token,secretKey)
-    if(decode.uid === ctx.header.uid && decode.scope.toString() === id) {
-      console.log('验证通过')
-    }else {
+    if(decode.uuId !== secretKey) {
       throw new InvalidToken({ msg: '认证失败，令牌失效'})
     }
   } catch (error) {
@@ -74,10 +71,10 @@ const loginRequired = async function (ctx, next) {
  * @param {TokenType} type 
  * @param {Object} options 
  */
- const generateToken = function (uid, scope, type = TokenType.ACCESS, options) {
-  const secretKey = uid
+ const generateToken = function (uuId, scope, type = TokenType.ACCESS, options) {
+  const secretKey = uuId
   const token = jwt.sign({
-      uid,
+      uuId,
       scope,
       type
   }, secretKey, {

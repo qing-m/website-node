@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-26 11:34:02
- * @LastEditTime: 2021-12-03 10:35:01
+ * @LastEditTime: 2021-12-06 15:49:16
  * @LastEditors: 王鹤垚
  * @Description: In User Settings Edit
  * @FilePath: \website-node\app\api\v1\admin.js
@@ -42,7 +42,7 @@ router.post('/login', async (ctx) => {
     request: 'POST: /api/v1/admin/login',
     data: {
       token: accessToken,
-      author: author
+      uuId: author.uuId
     }
   }
 })
