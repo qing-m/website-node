@@ -8,5 +8,9 @@ const { Forbidden, NotFound, ParameterException } = require('@exception')
 const bcrypt = require('bcryptjs')
 
 class homeDao {
-  
+
+}
+
+module.exports = {
+  homeDao
 }
