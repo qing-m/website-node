@@ -1,3 +1,7 @@
+/*
+ * @Author: 王鹤垚
+ * @LastEditors: 王鹤垚
+ */
 require('module-alias/register') // 文件夹别名
 
 const Koa = require('koa')
@@ -26,6 +30,6 @@ app.use(parser())
 
 InitManager.initCore(app)
 
-app.listen(8808,()=>{
-  console.log('server listen to 8808')
+app.listen(6680,()=>{
+  console.log('server listen to 6680')
 })
