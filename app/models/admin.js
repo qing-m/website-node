@@ -1,3 +1,7 @@
+/*
+ * @Author: 王鹤垚
+ * @LastEditors: 王鹤垚
+ */
 const { sequelize } = require('@core/db')
 const { Sequelize, DataTypes, Model } = require('sequelize')
 const bcrypt = require('bcryptjs')
@@ -26,7 +30,6 @@ Admin.init({
       this.setDataValue('password', val)
     },
     get() {
-      console.log(this.getDataValue)
       return this.getDataValue('password');
     }
   },
